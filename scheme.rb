@@ -11,9 +11,15 @@ class Object
 end
 
 class Array
+  alias :null? :empty?
+
   def list?
     self == [] ? true :
       (self.car.atom? || self.car.list?) && (self.cdr.list?)
+  end
+
+  def lat?
+    !self.map(&:atom?).include?(false)
   end
 
   def car

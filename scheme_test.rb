@@ -14,7 +14,7 @@ class TestSchemeObjectAtom < Test::Unit::TestCase
     assert 1.34.atom?
   end
 
-  def test_lists_are_not_numerics
+  def test_lists_are_not_atoms
     assert ![].atom?
   end
 end
@@ -47,6 +47,20 @@ class TestSchemeArrayListPredicate < Test::Unit::TestCase
   end
 end
 
+class TestSchemeArrayNullPredicate < Test::Unit::TestCase
+  def test_empty_is_null
+    assert [].null?
+  end
+
+  def test_not_empty_is_not_null
+    assert ![:foo].null?
+  end
+
+  def test_null_of_atom_undefined
+    assert(NoMethodError) { :a.null? }
+  end
+end
+
 class TestSchemeDeconstruction < Test::Unit::TestCase
   def test_car_of_atom_undefined
     assert(NoMethodError) { :a.car }
@@ -68,5 +82,19 @@ end
 class TestSchemeListConstruction < Test::Unit::TestCase
   def test_cons_atom_to_list
     assert_equal [:a, :b, :c], [:b, :c].cons(:a)
+  end
+end
+
+class TestSchemeListOfAtoms < Test::Unit::TestCase
+  def test_empty_list
+    assert [].lat?
+  end
+
+  def test_flat_list_of_atoms
+    assert [:a, "list", 3.14].lat?
+  end
+
+  def test_deep_list_is_not_a_list_of_atoms
+    assert ![[:a], :b, "list", 3.14].lat?
   end
 end
