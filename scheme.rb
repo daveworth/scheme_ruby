@@ -44,4 +44,11 @@ class Array
   def cons(sexpr)
     self.clone.unshift(sexpr)
   end
+
+  def rember(elt)
+    return self if self.null?
+    new = self.clone
+    new.delete_at(self.index(elt))
+    new
+  end
 end

@@ -98,3 +98,17 @@ class TestSchemeListOfAtoms < Test::Unit::TestCase
     assert ![[:a], :b, "list", 3.14].lat?
   end
 end
+
+class TestSchemeListRemeber < Test::Unit::TestCase
+  def test_rember_of_empty_list
+    assert_equal [], [].rember(:a)
+  end
+
+  def test_rember_removes_first_matching_atom
+    assert_equal [:a, :c], [:a, :b, :c].rember(:b)
+  end
+
+  def test_remember_does_not_remove_remaining_matching_atoms
+    assert_equal [:a, :c, :b, :b], [:a, :b, :c, :b, :b].rember(:b)
+  end
+end
