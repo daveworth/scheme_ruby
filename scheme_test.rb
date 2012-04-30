@@ -67,6 +67,6 @@ end
 
 class TestSchemeListConstruction < Test::Unit::TestCase
   def test_cons_atom_to_list
-    assert_equal [:a, [:b, :c]], [:b, :c].cons(:a)
+    assert_equal [:a, :b, :c], [:b, :c].cons(:a)
   end
 end

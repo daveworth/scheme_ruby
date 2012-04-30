@@ -36,6 +36,6 @@ class Array
   end
 
   def cons(sexpr)
-    [sexpr, self]
+    self.clone.unshift(sexpr)
   end
 end
